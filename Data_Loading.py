@@ -199,7 +199,7 @@ print(np.shape(new_X_val), np.shape(new_y_val))
 print(np.shape(new_X_test), np.shape(new_y_test))
 
 
-############ USE the Gaussian Noise code component of 'Data_Augmentation.py ################
+############ Add Gaussian Noise images. It is actually part of the data augmentation process. ################
 
 noisyI = []       # For train images. 
 
