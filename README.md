@@ -6,4 +6,4 @@ challenges, and more recently variational inference-based approaches are incorpo
 
 We utilized the Sicara few-shot library package for running our few-shot algorithm. Link to the Sicara Few-Shot github page: https://github.com/sicara/easy-few-shot-learning.
 
-All codes here are presented in **PyTorch** formay.
+All codes here are presented in **PyTorch** format.
