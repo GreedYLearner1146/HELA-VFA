@@ -197,3 +197,96 @@ new_y_test = [x[1] for x in test_array]
 print(np.shape(new_X_train), np.shape(new_y_train))
 print(np.shape(new_X_val), np.shape(new_y_val))
 print(np.shape(new_X_test), np.shape(new_y_test))
+
+
+############ USE the Gaussian Noise code component of 'Data_Augmentation.py ################
+
+noisyI = []       # For train images. 
+
+# Mean = 0, std = 0.005.
+
+for f1 in range (len(new_X_train)):
+  img = new_X_train[f1]
+  mean = 0.0   # some constant
+  std = 0.005   # some constant (standard deviation)
+  noisy_imgI = img + np.random.normal(mean, std, img.shape)
+  noisy_img_clippedI = np.clip(noisy_imgI, 0, 255)  # we might get out of bounds due to noise
+  noisy_img_clippedI  = np.asarray(noisy_img_clippedI) # REMEMBER TO ADD CONVERT TO ASARRAY FIRST BEFORE APPENDING!!!!!!
+  noisyI.append(noisy_img_clippedI)
+
+
+noisy1test = []     # For test images. 
+
+for f1t in range (len(new_X_test)):
+  imgt = new_X_test[f1t]
+  mean = 0.0   # some constant
+  std = 0.005   # some constant (standard deviation)
+  noisy_img1t = imgt + np.random.normal(mean, std, img.shape)
+  noisy_img_clipped1t = np.clip(noisy_img1t, 0, 255)  # we might get out of bounds due to noise
+  noisy_img_clipped1t  = np.asarray(noisy_img_clipped1t) # REMEMBER TO ADD CONVERT TO ASARRAY FIRST BEFORE APPENDING!!!!!!
+  noisy1test.append(noisy_img_clipped1t)
+
+######################### Arrays after inclusion of the noisy images ########################################
+
+train_img_FINAL = []
+val_img_FINAL = []
+test_img_FINAL = []
+
+train_label_FINAL = []
+val_label_FINAL = []
+test_label_FINAL = []
+
+
+for a in range (len(TRAIN)):
+   for b in range (600):
+      train_img_FINAL.append(train_img[a][b])
+      train_label_FINAL.append(a)  # 60 classes.
+
+for AI in range (len(noisyI)): # Add the gaussian noise 0.005.
+      train_img_FINAL.append(noisyI[AI])
+      train_label_FINAL.append(a)  # 60 classes.
+
+
+for e in range (len(test_img)):
+  for f in range (600):
+      test_img_FINAL.append(test_img[e][f])
+      test_label_FINAL.append(e+80)  # Remaining 20 classes.
+
+for E in range (len(noisy1test)):  # Add the gaussian noise 0.005.
+      test_img_FINAL.append(noisy1test[E])
+      test_label_FINAL.append(e+80)   # Remaining 20 classes.
+
+
+############# Reassemble in tuple format. ##################
+
+train_array = []
+val_array = []
+test_array = []
+
+for a,b in zip(train_img_FINAL,train_label_FINAL):
+  train_array.append((a,b))
+
+#for c,d in zip(val_img_final,val_label_final):
+  #val_array.append((c,d))
+
+for e,f in zip(test_img_FINAL,test_label_FINAL):
+  test_array.append((e,f))
+
+################## shuffle #############################
+from sklearn.utils import shuffle
+train_array = shuffle(train_array)
+test_array = shuffle(test_array)
+
+new_X_train = [x[0] for x in train_array]
+new_y_train = [x[1] for x in train_array]
+
+new_X_test = [x[0] for x in test_array]
+new_y_test = [x[1] for x in test_array]
+
+################### Check new shape after adding gaussian noise ###########################
+
+print(np.shape(new_X_train))
+print(np.shape(new_y_train))
+
+print(np.shape(new_X_test))
+print(np.shape(new_y_test))
