@@ -38,3 +38,5 @@ The selected methods are evaluated on the miniImageNet and are based on the appr
 |AssoAlign (WRN-28-10)| 65.92 $\pm$ 0.60 | 82.85 $\pm$ 0.55 |
 |FeLMi| 67.47 $\pm$ 0.70 | 86.08 $\pm$ 0.44 |
 |**HELA-VFA**| **68.20 $\pm$ 0.30** | **86.70 $\pm$ 0.70** |
+
+Except for AssoAlign, all the methods utilized the ResNet-12 as the training backbone. The backbone for the AssoAlign is stated in the parenthesis.
