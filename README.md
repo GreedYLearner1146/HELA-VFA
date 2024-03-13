@@ -40,3 +40,16 @@ The selected methods are evaluated on the miniImageNet and are based on the appr
 |**HELA-VFA**| **68.20 $\pm$ 0.30** | **86.70 $\pm$ 0.70** |
 
 Except for AssoAlign, all the methods utilized the ResNet-12 as the training backbone. The backbone for the AssoAlign is stated in the parenthesis.
+
+## Code Instructions ##
+
+## Citation Information ##
+
+Please cite the following paper if you find it useful for your work: 
+
+G.Y. Lee, T. Dam, D.P.Poenar, V.N.Duong and M.M. Ferdaus, ``HELA-VFA: A Hellinger Distance-Attention-based Feature Aggregation Network for Few-Shot Classification", in *Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision*, 2024.
+
+## Some References ##
+
+[1] A. Roy, A. Shah, K. Shah, P. Dhar, A. Cherian, and R. Chellappa, “Felmi: Few shot learning with hard
+mixup,” in *Advances in Neural Information Processing Systems*, 2022. 5, 6.
