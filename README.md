@@ -9,3 +9,32 @@ challenges, and more recently variational inference-based approaches are incorpo
 We utilized the Sicara few-shot library package for running our few-shot algorithm. Link to the Sicara Few-Shot github page: https://github.com/sicara/easy-few-shot-learning.
 
 All codes here are presented in **PyTorch** format.
+
+## Table of Results (For miniImageNet) ##
+
+The selected methods are evaluated on the miniImageNet and are based on the approaches by Roy et.al. `FeLMi : Few shot Learning with hard Mixup' [1]. For the tabulated results on CIFAR-FS, tieredImageNet and FC-100, please see our original conference paper. The few-shot evaluation utilized are the 5-way-1-shot and 5-way-5-shot approach. 
+
+| Method | 5-way-1-shot (%) | 5-way-5-shot (%) |
+| ------ | ------| ------| 
+|ProtoNet| 60.37 $\pm$ 0.83| 78.02 $\pm$ 0.57 |
+|TADAM| 58.50 $\pm$ 0.30| 76.70 $\pm$ 0.30 |
+|TapNet| 61.65 $\pm$ 0.15| 76.36 $\pm$ 0.10 |
+|MetaOptNet| 62.64 $\pm$ 0.61| 78.63 $\pm$ 0.46 |
+|MTL| 61.20 $\pm$ 1.80 | 75.50 $\pm$ 0.80 |
+|Shot-Free| 59.04 $\pm$ 0.43 | 77.64 $\pm$ 0.39 |
+|DSN-MR| 64.60 $\pm$ 0.72 | 79.51 $\pm$ 0.50 |
+|Deep-EMD| 65.91 $\pm$ 0.82 | 82.41 $\pm$ 0.56 |
+|FEAT| 66.78 $\pm$ 0.20 | 82.05 $\pm$ 0.14 |
+|Neg-Cosine| 63.85 $\pm$ 0.81 | 81.57 $\pm$ 0.56 |
+|RFS-Simple| 62.02 $\pm$ 0.63 | 79.64 $\pm$ 0.44 |
+|RFS-Distill| 64.82 $\pm$ 0.82 | 82.41 $\pm$ 0.43 |
+|SKD-Gen1| 66.54 $\pm$ 0.97 | 83.18 $\pm$ 0.54 |
+|P-Transfer| 64.21 $\pm$ 0.77 | 80.38 $\pm$ 0.59 |
+|MELR| 67.40 $\pm$ 0.43 | 83.40 $\pm$ 0.28 |
+|IEPT| 67.05 $\pm$ 0.44 | 82.90 $\pm$ 0.30 |
+|IER-distill| 66.85 $\pm$ 0.76 | 84.50 $\pm$ 0.53 |
+|Label-Halluc| 67.04 $\pm$ 0.70 | 85.87 $\pm$ 0.48 |
+|AssoAlign (ResNet-18)| 59.88 $\pm$ 0.67 | 80.35 $\pm$ 0.73 |
+|AssoAlign (WRN-28-10)| 65.92 $\pm$ 0.60 | 82.85 $\pm$ 0.55 |
+|FeLMi| 67.47 $\pm$ 0.70 | 86.08 $\pm$ 0.44 |
+|**HELA-VFA**| **68.20 $\pm$ 0.30** | **86.70 $\pm$ 0.70** |
