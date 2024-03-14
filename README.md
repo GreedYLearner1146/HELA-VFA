@@ -42,9 +42,10 @@ The selected methods are evaluated on the miniImageNet and are based on the appr
 Except for AssoAlign, all the methods utilized the ResNet-12 as the training backbone. The backbone for the AssoAlign is stated in the parenthesis.
 
 ## Code Instructions ##
-The codes instruction presented in this github utilized miniImageNet as an example. For the other datasets, simply download them and change the address path.
+The codes instructions presented in this github utilized miniImageNet as an example. For the other datasets, simply download them and change the address path.
 
 1) Run the data_preparation.py, which consists of the library packages, as well as the train-test split. The casting of the images into the respective array format are also performed, as well as adding gaussian noises with $\sigma = 0.10$, serving as an initial data augmentation step.
+2) Run the data_augmentation.py, which contains the essential transformations for data augmentation.
 
 ## Citation Information ##
 
