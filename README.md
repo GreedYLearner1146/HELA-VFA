@@ -53,7 +53,7 @@ The codes instructions presented in this github utilized miniImageNet as an exam
 5) Run the dataloader.py, which contains the dataloader for the training and testing set.
 6) Run the HELA_VFA_main.py
 7) Run the Hellinger_dist.py
-8) Run test_samplerloader.py, which contains the N_SHOT, N_WAY, N_QUERY, and number of evaluation task which can be easily configured.
+8) Run test_sampler_loader.py, which contains the N_SHOT, N_WAY, N_QUERY, and number of evaluation task which can be easily configured.
 
 ## Citation Information ##
 
