@@ -10,6 +10,8 @@ We utilized the Sicara few-shot library package for running our few-shot algorit
 
 All codes here are presented in **PyTorch** format.
 
+The link to our paper can be found at https://openaccess.thecvf.com/content/WACV2024/papers/Lee_HELA-VFA_A_Hellinger_Distance-Attention-Based_Feature_Aggregation_Network_for_Few-Shot_Classification_WACV_2024_paper.pdf 
+
 ## Table of Results (For miniImageNet) ##
 
 The selected methods are evaluated on the miniImageNet and are based on the approaches by Roy et.al. `FeLMi : Few shot Learning with hard Mixup' [1]. For the tabulated results on CIFAR-FS, tieredImageNet and FC-100, please see our original conference paper. The few-shot evaluation utilized are the 5-way-1-shot and 5-way-5-shot approach. 
