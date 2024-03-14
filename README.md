@@ -52,6 +52,7 @@ The codes instructions presented in this github utilized miniImageNet as an exam
 4) Run the ResNet.py, which contains the Resnet-12 backbone.
 5) Run the dataloader.py, which contains the dataloader for the training and testing set.
 6) Run the HELA_VFA_main.py
+7) Run the Hellinger_dist.py
 
 ## Citation Information ##
 
