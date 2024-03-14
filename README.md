@@ -51,7 +51,7 @@ The codes instructions presented in this github utilized miniImageNet as an exam
 3) Run the CBAM.py, which comprises the channel and spatial attention.
 4) Run the ResNet.py, which contains the Resnet-12 backbone.
 5) Run the dataloader.py, which contains the dataloader for the training and testing set.
-6) Run the HELA-VFA_main.py
+6) Run the HELA_VFA_main.py
 
 ## Citation Information ##
 
