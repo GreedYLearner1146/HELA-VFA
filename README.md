@@ -44,8 +44,9 @@ Except for AssoAlign, all the methods utilized the ResNet-12 as the training bac
 ## Code Instructions ##
 The codes instructions presented in this github utilized miniImageNet as an example. For the other datasets, simply download them and change the address path.
 
-1) Run the Data_preparation.py, which consists of the library packages, as well as the train-test split. The casting of the images into the respective array format are also performed, as well as adding gaussian noises with $\sigma = 0.10$, serving as an initial data augmentation step.
-2) Run the Data_augmentation.py, which contains the essential transformations for data augmentation. These include horizontal and vertical flips, as well as rotations by 90, 180 and 270 degrees, all at a probability of 0.5 (p = 0.5).
+1) Run the Data_Preparation.py, which consists of the library packages, as well as the train-test split. The casting of the images into the respective array format are also performed, as well as adding gaussian noises with $\sigma = 0.10$, serving as an initial data augmentation step.
+2) Run the Data_Augmentation.py, which contains the essential transformations for data augmentation. These include horizontal and vertical flips, as well as rotations by 90, 180 and 270 degrees, all at a probability of 0.5 (p = 0.5).
+3) Run the CBAM.py, which comprises the channel and spatial attention.
 
 ## Citation Information ##
 
