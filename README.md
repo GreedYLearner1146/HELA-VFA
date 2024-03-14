@@ -44,7 +44,7 @@ Except for AssoAlign, all the methods utilized the ResNet-12 as the training bac
 ## Code Instructions ##
 The codes instruction presented in this github utilized miniImageNet as an example. For the other datasets, simply download them and change the address path.
 
-1) Run the data_preparation.py, which consists of the library packages, as well as the train-test split.
+1) Run the data_preparation.py, which consists of the library packages, as well as the train-test split. The casting of the images into the respective array format are also performed, as well as adding gaussian noises with $\sigma = 0.10$, serving as an initial data augmentation step.
 
 ## Citation Information ##
 
