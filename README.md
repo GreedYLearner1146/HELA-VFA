@@ -54,6 +54,7 @@ The codes instructions presented in this github utilized miniImageNet as an exam
 6) Run the HELA_VFA_main.py
 7) Run the Hellinger_dist.py
 8) Run test_sampler_loader.py, which contains the N_SHOT, N_WAY, N_QUERY, and number of evaluation task which can be easily configured.
+9) Run evaluate_on_one_task.py to see how the model performed before the training.
 
 ## Citation Information ##
 
