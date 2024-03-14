@@ -42,6 +42,7 @@ The selected methods are evaluated on the miniImageNet and are based on the appr
 Except for AssoAlign, all the methods utilized the ResNet-12 as the training backbone. The backbone for the AssoAlign is stated in the parenthesis.
 
 ## Code Instructions ##
+The codes instruction presented in this github utilized miniImageNet as an example. For the other datasets, simply download them and change the address path.
 
 ## Citation Information ##
 
