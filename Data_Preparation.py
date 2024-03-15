@@ -88,21 +88,21 @@ def get_training_and_valid_sets(file_list):
     return training, validation
 
 trainlist_final,_ = get_training_and_valid_sets(shuffled)
-_,vallist = get_training_and_valid_sets(shuffled)
+#_,vallist = get_training_and_valid_sets(shuffled)
 
 # For validation and test data splitting (16 meta-valid, 20 meta-test).
 
-def get_validation_and_testing_sets(file_list):
-    split = 0.5 
-    split_index = floor(len(file_list) * split)
-    # Final valid.
-    valid = file_list[:split_index]
+#def get_validation_and_testing_sets(file_list):
+    #split = 0.5 
+    #split_index = floor(len(file_list) * split)
+    ## Final valid.
+    #valid = file_list[:split_index]
     # Final test.
-    test = file_list[split_index:]
-    return valid, test
+    #test = file_list[split_index:]
+    #return valid, test
 
-vallist_final,_ = get_validation_and_testing_sets(vallist)
-_,testlist_final = get_validation_and_testing_sets(vallist)
+#vallist_final,_ = get_validation_and_testing_sets(vallist)
+#_,testlist_final = get_validation_and_testing_sets(vallist)
 
 ######################## Load Meta-train Images ###############################
 
@@ -125,71 +125,57 @@ for train in trainlist_final:
    train_img.append(data_train_img)
 
 
-############# Train, valid, test images in array list format ##################
+############# Train, test images in array list format ##################
 
 TRAIN = []
 
 for i in range (len(train_img)):
-   TRAIN.append(train_img[i][0:600])       # Each class has 600 images.
+   TRAIN.append(train_img[i][0:600])
 
-val_img = []       # Load valid images.
+test_img = []
 
-for val in vallist_final:
-   data_val_img = load_images(path + '/' + val + '/')        # Valid path as: 'YOUR PATH FOR THE MINIIMAGENET DATA HERE/val/' 
-   val_img.append(data_val_img)
-
-test_img = []            # Load test images.
-
-for test in testlist_final:        
-   data_test_img = load_images(path + '/' + test + '/')     # Test path as: 'YOUR PATH FOR THE MINIIMAGENET DATA HERE/test/' 
+for test in testlist_final:
+   data_test_img = load_images(path + '/' + test + '/')
    test_img.append(data_test_img)
 
 ############# Train, valid, test images + labels in array list format ##################
 
 train_img_final = []
-val_img_final = []
 test_img_final = []
 
 train_label_final = []
-val_label_final = []
 test_label_final = []
 
 
 for a in range (len(TRAIN)):
    for b in range (600):
       train_img_final.append(train_img[a][b])
-      train_label_final.append(a)  # 64 classes.
-
-for c in range (len(val_img)):
-   for d in range (600):
-      val_img_final.append(val_img[c][d])
-      val_label_final.append(c+64)  # 16 classes.
+      train_label_final.append(a)
 
 for e in range (len(test_img)):
   for f in range (600):
       test_img_final.append(test_img[e][f])
-      test_label_final.append(e+80)  # Remaining 20 classes.
+      test_label_final.append(e+80)
 
 ############# Reassemble in tuple format. ##################
 
 train_array = []
-val_array = []
 test_array = []
 
 for a,b in zip(train_img_final,train_label_final):
   train_array.append((a,b))
 
-for c,d in zip(val_img_final,val_label_final):
-  val_array.append((c,d))
-
 for e,f in zip(test_img_final,test_label_final):
   test_array.append((e,f))
 
+################## shuffle #############################
+
+from sklearn.utils import shuffle
+train_array = shuffle(train_array)
+test_array = shuffle(test_array)
+
 new_X_train = [x[0] for x in train_array]
 new_y_train = [x[1] for x in train_array]
-
-new_X_val = [x[0] for x in val_array]
-new_y_val = [x[1] for x in val_array]
 
 new_X_test = [x[0] for x in test_array]
 new_y_test = [x[1] for x in test_array]
@@ -216,10 +202,23 @@ for f1 in range (len(new_X_train)):
   noisy_img_clippedI  = np.asarray(noisy_img_clippedI) # REMEMBER TO ADD CONVERT TO ASARRAY FIRST BEFORE APPENDING!!!!!!
   noisyI.append(noisy_img_clippedI)
 
+noisy1 = []
+
+# Mean = 0, std = 0.10
+
+for f1 in range (len(new_X_train)):
+  img = new_X_train[f1]
+  mean = 0.0   # some constant
+  std = 0.10   # some constant (standard deviation)
+  noisy_img1 = img + np.random.normal(mean, std, img.shape)
+  noisy_img_clipped1 = np.clip(noisy_img1, 0, 255)  # we might get out of bounds due to noise
+  noisy_img_clipped1  = np.asarray(noisy_img_clipped1) # REMEMBER TO ADD CONVERT TO ASARRAY FIRST BEFORE APPENDING!!!!!!
+  noisy1.append(noisy_img_clipped1)
+
 
 noisy1test = []     # For test images. 
 
-for f1t in range (len(new_X_test)):
+for f1t in range (len(new_X_test)):   # Mean = 0, std = 0.005
   imgt = new_X_test[f1t]
   mean = 0.0   # some constant
   std = 0.005   # some constant (standard deviation)
@@ -228,14 +227,25 @@ for f1t in range (len(new_X_test)):
   noisy_img_clipped1t  = np.asarray(noisy_img_clipped1t) # REMEMBER TO ADD CONVERT TO ASARRAY FIRST BEFORE APPENDING!!!!!!
   noisy1test.append(noisy_img_clipped1t)
 
+noisyItest = []
+
+# Mean = 0, std = 0.10
+
+for f1t in range (len(new_X_test)):
+  imgt = new_X_test[f1t]
+  mean = 0.0   # some constant
+  std = 0.10   # some constant (standard deviation)
+  noisy_imgIt = imgt + np.random.normal(mean, std, img.shape)
+  noisy_img_clippedIt = np.clip(noisy_imgIt, 0, 255)  # we might get out of bounds due to noise
+  noisy_img_clippedIt  = np.asarray(noisy_img_clippedIt) # REMEMBER TO ADD CONVERT TO ASARRAY FIRST BEFORE APPENDING!!!!!!
+  noisyItest.append(noisy_img_clippedIt)
+
 ######################### Arrays after inclusion of the noisy images ########################################
 
 train_img_FINAL = []
-val_img_FINAL = []
 test_img_FINAL = []
 
 train_label_FINAL = []
-val_label_FINAL = []
 test_label_FINAL = []
 
 
@@ -248,6 +258,10 @@ for AI in range (len(noisyI)): # Add the gaussian noise 0.005.
       train_img_FINAL.append(noisyI[AI])
       train_label_FINAL.append(a)  # 60 classes.
 
+for A in range (len(noisy1)): # Add the gaussian noise 0.10.
+      train_img_FINAL.append(noisy1[A])
+      train_label_FINAL.append(a)
+
 
 for e in range (len(test_img)):
   for f in range (600):
@@ -258,18 +272,18 @@ for E in range (len(noisy1test)):  # Add the gaussian noise 0.005.
       test_img_FINAL.append(noisy1test[E])
       test_label_FINAL.append(e+80)   # Remaining 20 classes.
 
+for EI in range (len(noisyItest)):  # Add the gaussian noise 0.10.
+      test_img_FINAL.append(noisyItest[E])
+      test_label_FINAL.append(e+80)
+
 
 ############# Reassemble in tuple format. ##################
 
 train_array = []
-val_array = []
 test_array = []
 
 for a,b in zip(train_img_FINAL,train_label_FINAL):
   train_array.append((a,b))
-
-#for c,d in zip(val_img_final,val_label_final):
-  #val_array.append((c,d))
 
 for e,f in zip(test_img_FINAL,test_label_FINAL):
   test_array.append((e,f))
