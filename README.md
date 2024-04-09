@@ -12,7 +12,7 @@ All codes here are presented in **PyTorch** format.
 
 The link to our paper can be found at https://openaccess.thecvf.com/content/WACV2024/papers/Lee_HELA-VFA_A_Hellinger_Distance-Attention-Based_Feature_Aggregation_Network_for_Few-Shot_Classification_WACV_2024_paper.pdf 
 
-**This repo is still updating as of current. Stay tune for latest changes**
+(**This repo is still updating as of current. Stay tune for latest changes.**)
 
 ## Table of Results (For miniImageNet) ##
 
