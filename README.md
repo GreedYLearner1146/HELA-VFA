@@ -50,7 +50,7 @@ The codes instructions presented in this github utilized miniImageNet as an exam
 
 1) Run the Data_Preparation.py, which consists of the library packages, as well as the train-test split. The casting of the images into the respective array format are also performed, as well as adding gaussian noises with $\sigma = 0.005$ and $\sigma = 0.10$, serving as an initial data augmentation step.
 2) Run the Data_Augmentation.py, which contains the essential transformations for data augmentation. These include horizontal and vertical flips, as well as rotations by 90, 180 and 270 degrees, all at a probability of 0.5 (p = 0.5).
-3) Run the Attention.py, which comprises the channel and spatial attention module (**Currently Experimenting something using such module, will upload this section of the code at a later time**).
+3) Run the Attention.py, which comprises the channel and spatial attention module (**Currently experimenting something using such module, will upload this section of the code at a later time**).
 4) Run the ResNet12.py, which contains the Resnet-12 backbone.
 5) Run the dataloader.py, which contains the dataloader for the training and testing set.
 6) Run the HELA_VFA_main.py
