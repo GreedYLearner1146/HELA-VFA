@@ -12,6 +12,8 @@ All codes here are presented in **PyTorch** format.
 
 The link to our paper can be found at https://openaccess.thecvf.com/content/WACV2024/papers/Lee_HELA-VFA_A_Hellinger_Distance-Attention-Based_Feature_Aggregation_Network_for_Few-Shot_Classification_WACV_2024_paper.pdf 
 
+**This repo is still updating as of current. Stay tune for latest changes**
+
 ## Table of Results (For miniImageNet) ##
 
 The selected methods are evaluated on the miniImageNet and are based on the approaches by Roy et.al. `FeLMi : Few shot Learning with hard Mixup' [1]. For the tabulated results on CIFAR-FS, tieredImageNet and FC-100, please see our original conference paper. The few-shot evaluation utilized are the 5-way-1-shot and 5-way-5-shot approach. 
@@ -48,7 +50,7 @@ The codes instructions presented in this github utilized miniImageNet as an exam
 
 1) Run the Data_Preparation.py, which consists of the library packages, as well as the train-test split. The casting of the images into the respective array format are also performed, as well as adding gaussian noises with $\sigma = 0.005$ and $\sigma = 0.10$, serving as an initial data augmentation step.
 2) Run the Data_Augmentation.py, which contains the essential transformations for data augmentation. These include horizontal and vertical flips, as well as rotations by 90, 180 and 270 degrees, all at a probability of 0.5 (p = 0.5).
-3) Run the CBAM.py, which comprises the channel and spatial attention.
+3) Run the Attention.py, which comprises the channel and spatial attention module (**Currently Experimenting something using such module, will upload this section of the code at a later time**).
 4) Run the ResNet12.py, which contains the Resnet-12 backbone.
 5) Run the dataloader.py, which contains the dataloader for the training and testing set.
 6) Run the HELA_VFA_main.py
