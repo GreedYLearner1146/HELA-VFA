@@ -16,13 +16,13 @@ The link to our paper can be found at https://openaccess.thecvf.com/content/WACV
 
 ## Preliminary Results (For miniImageNet) ##
 
-The selected methods are evaluated on the miniImageNet and are based on the approaches by Roy et.al. `FeLMi : Few shot Learning with hard Mixup' [1]. For the tabulated results on CIFAR-FS, tieredImageNet and FC-100, please see our original conference paper. The few-shot evaluation utilized are the 5-way-1-shot and 5-way-5-shot approach. 
+The selected methods (in the paper) are evaluated on the miniImageNet and are based on the approaches by Roy et.al. `FeLMi : Few shot Learning with hard Mixup' [1]. For the tabulated results on CIFAR-FS, tieredImageNet and FC-100, please see our original conference paper. The few-shot evaluation utilized are the 5-way-1-shot and 5-way-5-shot approach. 
 
 | Method | 5-way-1-shot (%) | 5-way-5-shot (%) |
 | ------ | ------| ------| 
 |**HELA-VFA**| **68.2 $\pm$ 0.30** | **86.7 $\pm$ 0.70** |
 
-Except for AssoAlign, all the methods utilized the ResNet-12 as the training backbone. The backbone for the AssoAlign is stated in the parenthesis.
+The backbone for our HELA-VFA is the ResNet-12.
 
 **However, in this repo the code would be for the configuration without the attention module temporarily, as I'm currently experimenting something on this aspect of the code. So the result obtained would be close to that of the No Attention + $\mathcal{L}_{Hesim}$ in the ablation study section of the paper. Apology for the inconvenience caused.**
 
