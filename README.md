@@ -14,7 +14,7 @@ The link to our paper can be found at https://openaccess.thecvf.com/content/WACV
 
 (**This repo is still updating as of current. Stay tune for latest changes.**)
 
-## Table of Results (For miniImageNet) ##
+## Preliminary Results (For miniImageNet) ##
 
 The selected methods are evaluated on the miniImageNet and are based on the approaches by Roy et.al. `FeLMi : Few shot Learning with hard Mixup' [1]. For the tabulated results on CIFAR-FS, tieredImageNet and FC-100, please see our original conference paper. The few-shot evaluation utilized are the 5-way-1-shot and 5-way-5-shot approach. 
 
