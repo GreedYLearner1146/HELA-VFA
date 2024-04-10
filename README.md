@@ -24,6 +24,8 @@ The selected methods are evaluated on the miniImageNet and are based on the appr
 
 Except for AssoAlign, all the methods utilized the ResNet-12 as the training backbone. The backbone for the AssoAlign is stated in the parenthesis.
 
+**However, in this repo the code would be for the configuration without the attention module temporarily, as I'm currently experimenting something on this aspect of the code. So the result obtained would be close to that of the No Attention + $\mathcal{L}_{Hesim}$ in the ablation study section of the paper. Apology for the inconvenience caused.**
+
 ## Code Instructions ##
 The codes instructions presented in this github utilized miniImageNet as an example. For the other datasets, simply download them and change the address path.
 
