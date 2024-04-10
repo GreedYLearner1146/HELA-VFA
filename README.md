@@ -20,11 +20,15 @@ The selected methods are evaluated on the miniImageNet and are based on the appr
 
 | Method | 5-way-1-shot (%) | 5-way-5-shot (%) |
 | ------ | ------| ------| 
-|**HELA-VFA**| **68.20 $\pm$ 0.30** | **86.70 $\pm$ 0.70** |
+|**HELA-VFA**| **68.2 $\pm$ 0.30** | **86.7 $\pm$ 0.70** |
 
 Except for AssoAlign, all the methods utilized the ResNet-12 as the training backbone. The backbone for the AssoAlign is stated in the parenthesis.
 
 **However, in this repo the code would be for the configuration without the attention module temporarily, as I'm currently experimenting something on this aspect of the code. So the result obtained would be close to that of the No Attention + $\mathcal{L}_{Hesim}$ in the ablation study section of the paper. Apology for the inconvenience caused.**
+
+| Method | 5-way-1-shot (%) | 5-way-5-shot (%) |
+| ------ | ------| ------| 
+|**HELA-VFA (No Attention + $\mathcal{L}_{Hesim}$)**| **63.3 $\pm$ 0.5** | **82.6 $\pm$ 1.0** |
 
 ## Code Instructions ##
 The codes instructions presented in this github utilized miniImageNet as an example. For the other datasets, simply download them and change the address path.
