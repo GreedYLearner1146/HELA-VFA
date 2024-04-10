@@ -1,6 +1,18 @@
 from torch.utils.data import Dataset
 from torch.utils.data import DataLoader
 
+from torch.utils.data import default_collate
+from torchvision.transforms import v2
+
+#################### Cutmix or MixUp data augmentation ################################
+
+cutmix = v2.CutMix(num_classes=100) 
+mixup = v2.MixUp(num_classes=100)  
+cutmix_or_mixup = v2.RandomChoice([cutmix, mixup])
+
+def collate_fn(batch):
+    return cutmix_or_mixup(*default_collate(batch))
+    
 ########################### miniImageNet dataloader ###################################
 
 class miniImageNet_CustomDataset(Dataset):
@@ -16,10 +28,10 @@ class miniImageNet_CustomDataset(Dataset):
     def __len__(self):
         return len(self.labels)
 
-# new_X_train,new_y_train, new_X_test, new_y_test from 'Data_Preparation.py'
+#################################### Dataloader ##############################
 
-train_dataset = miniImageNet_CustomDataset(new_X_train,new_y_train, transform=data_transform)
+train_dataset = miniImageNet_CustomDataset(new_X_train,new_y_train, transform=[data_transform, Augment]) # Combined data transform
 test_dataset =  miniImageNet_CustomDataset(new_X_test, new_y_test, transform=data_transform_test)
 
-train_dataloader = DataLoader(train_dataset, batch_size=1024, shuffle=True)  
-test_dataloader = DataLoader(test_dataset, batch_size=1024, shuffle=True)   # 
+train_dataloader = DataLoader(train_dataset, batch_size=1024, shuffle=True, collate_fn=collate_fn) # Collate_fn called on here.
+test_dataloader = DataLoader(test_dataset, batch_size=1024, shuffle=True)
