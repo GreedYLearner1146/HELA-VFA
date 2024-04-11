@@ -10,8 +10,9 @@ def fit(
     )
 
     loss1 = criterion1(classification_scores, query_labels.cuda())
-    loss2 = criterion2(classification_scores, query_labels.cuda())
-    loss = 0.90*loss1 + 0.10*loss2 # Add loss function .
+    loss2 = Hesimloss(classification_scores, query_labels.cuda())
+    loss3 = loss_NTXentLoss(classification_scores, query_labels.cuda())
+    loss = loss1 + 0.5*loss2 + 0.5*loss3 
     loss = loss1
     loss.backward()
     optimizer.step()
