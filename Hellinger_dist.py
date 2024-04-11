@@ -15,8 +15,8 @@ def Hellinger_dist(x,y): # Where N is the number of class.
     # Inputs for variational computation. Use mean and std of the given inputs.
     x_m = torch.mean(x1)
     y_m = torch.mean(y1)
-    x_std = torch.mean(x1)
-    y_std  = torch.mean(y1)
+    x_std = torch.std(x1)
+    y_std  = torch.std(y1)
 
     # The reparameterization trick. The second half of the parenthesis is the normal distribution.
     P1 = x_m + x_std*(1/(torch.sqrt(torch.abs(2*np.pi*x_std*x_std))))*torch.exp(-((x1-x_m)*(x1-x_m))/(2*x_std*x_std))
