@@ -1,5 +1,8 @@
 import torch as F
 
+!pip install pytorch-metric-learning
+from pytorch_metric_learning import losses
+
 class Hellinger_Sim_Loss(nn.Module):
     def __init__(self, batch_size, temperature):
         super().__init__()
