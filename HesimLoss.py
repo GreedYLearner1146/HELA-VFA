@@ -3,6 +3,9 @@ import torch as F
 !pip install pytorch-metric-learning
 from pytorch_metric_learning import losses
 
+# These functions crucial for our HesimLoss are mainly adapted from fron the Ntxent_loss in the pytorch metric learning libary by Kevin Musgrave.
+# https://github.com/KevinMusgrave/pytorch-metric-learning/tree/master,
+
 class Hellinger_Sim_Loss(nn.Module):
     def __init__(self, batch_size, temperature):
         super().__init__()
