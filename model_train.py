@@ -11,8 +11,7 @@ def fit(
 
     loss1 = criterion1(classification_scores, query_labels.cuda())
     loss2 = Hesimloss(classification_scores, query_labels.cuda())
-    loss3 = loss_NTXentLoss(classification_scores, query_labels.cuda())
-    loss = loss1 + 0.5*loss2 + 0.5*loss3 
+    loss = loss1 + 0.5*loss2 
     loss = loss1
     loss.backward()
     optimizer.step()
