@@ -6,45 +6,68 @@ from pytorch_metric_learning import losses
 # These functions crucial for our HesimLoss are mainly adapted from fron the Ntxent_loss in the pytorch metric learning libary by Kevin Musgrave.
 # https://github.com/KevinMusgrave/pytorch-metric-learning/tree/master,
 
-class Hellinger_Sim_Loss(nn.Module):
-    def __init__(self, batch_size, temperature):
-        super().__init__()
-        self.batch_size = batch_size
+####################################################################################
+
+class SqRootSimilarity(BaseDistance):
+    def __init__(self, **kwargs):
+        super().__init__(is_inverted=True, **kwargs)
+        assert self.is_inverted
+
+    def compute_mat(self, query_emb, ref_emb):
+        return torch.matmul(query_emb, ref_emb.t())
+
+    def pairwise_distance(self, query_emb, ref_emb):
+        return torch.sum(query_emb * ref_emb, dim=1)
+
+####################################################################################
+
+class HellingerSimilarity(SqRootSimilarity):
+    def __init__(self, **kwargs):
+        super().__init__(normalize_embeddings=True, **kwargs)
+        assert self.is_inverted
+        assert self.normalize_embeddings
+
+####################################################################################
+
+class HesimLoss(GenericPairLoss):
+    def __init__(self, temperature=0.01, **kwargs):
+        super().__init__(mat_based_loss=False, **kwargs)
         self.temperature = temperature
+        self.add_to_recordable_attributes(list_of_names=["temperature"], is_stat=False)
 
-        self.mask = self.mask_correlated_samples(batch_size)
-        self.criterion = nn.CrossEntropyLoss(reduction="sum")
+    def _compute_loss(self, pos_pairs, neg_pairs, indices_tuple):
+        a1, p, a2, _ = indices_tuple
 
-    def mask_correlated_samples(self, batch_size):
-        N = 2 * batch_size
-        mask = torch.ones((N, N), dtype=bool)
-        mask = mask.fill_diagonal_(0)
+        if len(a1) > 0 and len(a2) > 0:
+            dtype = neg_pairs.dtype
+            # if dealing with actual distances, use negative distances
+            if not self.distance.is_inverted:
+                pos_pairs = -pos_pairs
+                neg_pairs = -neg_pairs
 
-        for i in range(batch_size):
-            mask[i, batch_size + i] = 0
-            mask[batch_size + i, i] = 0
-        return mask
+            pos_pairs = pos_pairs.unsqueeze(1) / self.temperature
+            neg_pairs = neg_pairs / self.temperature
+            n_per_p = to_dtype(a2.unsqueeze(0) == a1.unsqueeze(1), dtype=dtype)
+            neg_pairs = neg_pairs * n_per_p
+            neg_pairs[n_per_p == 0] = neg_inf(dtype)
 
-    def forward(self, z_i, z_j):
+            max_val = torch.max(
+                pos_pairs, torch.max(neg_pairs, dim=1, keepdim=True)[0]
+            ).detach()
+            numerator = torch.exp(torch.sqrt(torch.abs(pos_pairs)) - torch.sqrt(torch.abs(max_val))).squeeze(1)   # Hellinger similarity.
+            denominator = torch.sum(torch.exp(torch.sqrt(torch.abs(neg_pairs)) - torch.sqrt(torch.abs(max_val))), dim=1) + numerator  # Hellinger similarity.
+            log_exp = torch.log((numerator / denominator) + small_val(dtype))
+            return {
+                "loss": {
+                    "losses": -log_exp,
+                    "indices": (a1, p),
+                    "reduction_type": "pos_pair",
+                }
+            }
+        return self.zero_losses()
 
-        N = 2 * self.batch_size
+    def get_default_distance(self):
+        return HellingerSimilarity()
 
-        z = torch.cat((torch.sqrt(torch.abs(z_i)), torch.sqrt(torch.abs(z_i))), dim=0)
-
-        # Hellinger Similarity.
-        magnitude = (z**2).sum(1).expand(self.batch_size*2, self.batch_size*2)
-        sim = F.relu(magnitude).sqrt()
-
-        sim_i_j = torch.diag(sim, self.batch_size)
-        sim_j_i = torch.diag(sim, -self.batch_size)
-
-        positive_samples = torch.cat((sim_i_j, sim_j_i), dim=0)
-        negative_samples = sim[self.mask]
-
-        labels = torch.from_numpy(np.array([0]*N)).reshape(-1).to(positive_samples.device).float()
-
-        logits = torch.cat((positive_samples, negative_samples), dim=0)
-        loss = self.criterion(logits[0:100], labels)
-        loss /= N
-
-        return loss
+######################################################
+Hesimloss= HesimLoss(temperature=0.01) 
