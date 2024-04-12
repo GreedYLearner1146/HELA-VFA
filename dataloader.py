@@ -30,7 +30,7 @@ class miniImageNet_CustomDataset(Dataset):
 
 #################################### Dataloader ##############################
 
-train_dataset = miniImageNet_CustomDataset(new_X_train,new_y_train, transform=[data_transform, Augment]) # Combined data transform
+train_dataset = miniImageNet_CustomDataset(new_X_train,new_y_train, transform=[data_transform, Augment]) # Combined data transform. Augment is from Data_Augmentation.py
 test_dataset =  miniImageNet_CustomDataset(new_X_test, new_y_test, transform=data_transform_test)
 
 train_dataloader = DataLoader(train_dataset, batch_size=1024, shuffle=True, collate_fn=collate_fn) # Collate_fn called on here.
