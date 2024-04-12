@@ -39,6 +39,9 @@ The codes instructions presented in this github utilized miniImageNet as an exam
 10) Run model_train.py to train the model.
 11) Finally, evaluate.py to see how the model performed before the training.
 
+## Additional Remarks ##
+For the Hesim code file, please run the functions in the following orders: Common_functions.py -> loss_and_miners_utils.py -> Module_With_Records.py -> Base_Reducers.py -> MeanReducer.py -> MultipleReducers_Do_Nothing_Reducers.py -> BaseDistances.py -> LpDistance.py -> ModulesWithRecordsandReducer.py -> Mixins.py -> BaseMetricLossFunction.py -> GenericPairLoss.py -> HesimLoss.py
+
 ## Citation Information ##
 
 Please cite the following paper if you find it useful for your work: 
