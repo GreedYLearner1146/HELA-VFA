@@ -29,15 +29,15 @@ The codes instructions presented in this github utilized miniImageNet as an exam
 
 1) Run the Data_Preparation.py, which consists of the library packages, as well as the train-test split. The casting of the images into the respective array format are also performed.
 2) Run the Data_Augmentation.py, which contains the essential transformations for data augmentation. These include horizontal and vertical flips, as well as rotations by 90 and 270 degrees, all at a probability of 0.5 (p = 0.5).
-3) Run the Attention.py, which comprises the channel and spatial attention module (**Currently experimenting something using such module, will upload this section of the code at a later time**).
-4) Run the ResNet12.py, which contains the Resnet-12 backbone.
+3) Run the Attention.py, which comprises the channel and spatial attention module.
+4) Run the ResNet12.py, which contains the Resnet-12 backbone (with attention module incorporated).
 5) Run the dataloader.py, which contains the dataloader for the training and testing set.
-6) Run the HELA_VFA_main.py
-7) Run the Hellinger_dist.py
-8) Run test_sampler_loader.py, which contains the N_SHOT, N_WAY, N_QUERY, and number of evaluation task which can be easily configured.
-9) Run evaluate_on_one_task.py to see how the model performed before the training.
-10) Run Hellinger_Sim_Loss.py, which comprise the codes for the Hellinger Similarity loss function as highlighted in our paper.
-11) Finally, run model_train.py to train the model.
+6) Run the Hellinger_dist.py
+7) Run the HELA_VFA_main.py
+8) Run test_sampler_loader.py, which contains the hyperparameters N_SHOT, N_WAY, N_QUERY, and number of evaluation task which can be easily configured.
+9) Run the sub-functions contained in the folder Hesim, which comprise the codes for the various helper functions leading up to the Hesim loss function as highlighted in our paper. The helper functions are mainly adapted from the pytorch metric learning library by Kevin Musgrave: https://github.com/KevinMusgrave/pytorch-metric-learning. 
+10) Run model_train.py to train the model.
+11) Finally, run evaluate_on_one_task.py to see how the model performed before the training.
 
 ## Citation Information ##
 
