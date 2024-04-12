@@ -8,6 +8,11 @@ import numpy as np
 import scipy.stats
 import torch
 
+import torch as F
+
+!pip install pytorch-metric-learning
+from pytorch_metric_learning import losses
+
 ##################### All the codes contained in this Hesim folders are adapted from pytorch_metric_learning github page by Kevin Musgrave ####################################
 ############################## https://github.com/KevinMusgrave/pytorch-metric-learning/tree/master #########################################
 
