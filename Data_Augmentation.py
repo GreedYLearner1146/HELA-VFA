@@ -1,3 +1,7 @@
+########################## Data Augmentation steps #############################
+
+from torchvision import transforms
+from torchvision.transforms import v2
 
 from torchvision.transforms import (
     Compose,
@@ -7,16 +11,12 @@ from torchvision.transforms import (
     RandomVerticalFlip,
 )
 
-from torchvision import transforms
-from torchvision.transforms import v2
-
 # The data augmentation selected for the train datasets are as below.
 
 data_transform = transforms.Compose(
 
      [
             transforms.ToTensor(),
-            #v2.RandAugment(),  # RandAugment
             transforms.Resize((84,84)),
             transforms.CenterCrop((84,84)),
             transforms.RandomVerticalFlip(0.5),
@@ -26,6 +26,8 @@ data_transform = transforms.Compose(
             transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
        ])
 
+
+# The pre-processing procedure selected for the test datasets are as below.
 
 data_transform_test = transforms.Compose(
 
@@ -37,7 +39,7 @@ data_transform_test = transforms.Compose(
 
 import torchvision.transforms as T
 
-# Based on the Augmentation procedure laid out in the simCLR paper, as our Hesim Loss has an analogous structure #
+# Based on the Augmentation procedure laid out in the simCLR paper, as our Hesim loss function has an analogous structure. #
 
 class Augment:
    """
