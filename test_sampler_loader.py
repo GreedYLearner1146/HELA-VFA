@@ -21,6 +21,8 @@ test_loader = DataLoader(
     collate_fn=test_sampler.episodic_collate_fn,
 )
 
+#################### Create support and query labels and images ###################
+
 (example_support_images,
  example_support_labels,
  example_query_images,
@@ -37,8 +39,8 @@ example_scores = model(
 ).detach()
 
 _, example_predicted_labels = torch.max(example_scores.data, 1)
-
 testlabels = [instance[1] for instance in test_dataset]
 
-
-
+############# You can plot some examples of support and query images using the two lines below ############
+plot_images(example_support_images, "support images", images_per_row=N_SHOT)
+plot_images(example_query_images, "query images", images_per_row=N_QUERY)
