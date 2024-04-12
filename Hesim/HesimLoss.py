@@ -60,3 +60,6 @@ class HesimLoss(GenericPairLoss):
 
     def get_default_distance(self):
         return HellingerSimilarity()
+
+#########################################################################
+Hesimloss= HesimLoss(temperature=0.01)  # Pre-requisite to running the HesimLoss criterion in the training code.
