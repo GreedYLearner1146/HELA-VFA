@@ -1,14 +1,12 @@
 from typing import List, Optional, Type, Union
 import torch
 from torch import Tensor, nn
-#from torchvision.models.resnet import BasicBlock, Bottleneck, conv1x1
-
 import torch.nn as nn
 import torch
 from itertools import chain, combinations
+#from torchvision.models.resnet import BasicBlock, Bottleneck, conv1x1
 
-__all__ = ['resnet10', 'resnet12', 'resnet18', 'resnet34', 'resnet50', 'resnet101',
-           'resnet152']
+############################### The ResNet12 (with attention from Attention.py) architecture and its sub-module #####################################
 
 def conv3x3(in_planes, out_planes, stride=1):
     """3x3 convolution with padding"""
@@ -34,6 +32,10 @@ class BasicBlock(nn.Module):
         self.downsample = downsample
         self.stride = stride
 
+        # Attention module 1.
+        self.ca = ChannelAttention(planes)
+        self.sa = SpatialAttention()
+
 
     def forward(self, x):
         identity = x
@@ -44,6 +46,10 @@ class BasicBlock(nn.Module):
 
         out = self.conv2(out)
         out = self.bn2(out)
+
+        # Attention module I.
+        out = self.ca(out) * out
+        out = self.sa(out) * out
 
         if self.downsample is not None:
             identity = self.downsample(x)
@@ -72,6 +78,10 @@ class Bottleneck(nn.Module):
 
         self.sigmoid = nn.Sigmoid()
 
+        # Attention module 2.
+        self.ca = ChannelAttention(planes*4)
+        self.sa = SpatialAttention()
+
     def forward(self, x):
         identity = x
 
@@ -85,6 +95,10 @@ class Bottleneck(nn.Module):
 
         out = self.conv3(out)
         out = self.bn3(out)
+
+        # Attention module II.
+        out = self.ca(out) * out
+        out = self.sa(out) * out
 
         if self.downsample is not None:
             identity = self.downsample(x)
