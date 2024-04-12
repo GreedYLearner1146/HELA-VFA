@@ -43,7 +43,8 @@ The codes instructions presented in this github utilized miniImageNet as an exam
 
 Please cite the following paper if you find it useful for your work: 
 
-G.Y. Lee, T. Dam, D.P.Poenar, V.N.Duong and M.M. Ferdaus, ``HELA-VFA: A Hellinger Distance-Attention-based Feature Aggregation Network for Few-Shot Classification", in *Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision*, 2024.
+Lee,  G. Y., Dam,  T., Poenar,  D. P., Duong,  V. N. & Ferdaus,  M. M. (2024). HELA-VFA: a hellinger distance-attention-based feature aggregation network for few-shot classification. 2024 IEEE/CVF Winter Conference on Applications of Computer Vision (WACV), 2162-2172. https://dx.doi.org/10.1109/WACV57701.2024.00217
+
 
 ## Some References ##
 
