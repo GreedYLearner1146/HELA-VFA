@@ -62,4 +62,4 @@ class HesimLoss(GenericPairLoss):
         return HellingerSimilarity()
 
 #########################################################################
-Hesimloss= HesimLoss(temperature=0.01)  # Pre-requisite to running the HesimLoss criterion in the training code.
+Hesimloss= HesimLoss(temperature=0.01)  # Pre-requisite to running the HesimLoss criterion in the training code model_train.py.
