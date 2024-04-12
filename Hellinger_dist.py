@@ -21,6 +21,6 @@ def Hellinger_dist(x,y): # Where N is the number of class.
     # The reparameterization trick. The second half of the parenthesis is the normal distribution.
     P1 = x_m + x_std*(1/(torch.sqrt(torch.abs(2*np.pi*x_std*x_std))))*torch.exp(-((x1-x_m)*(x1-x_m))/(2*x_std*x_std))
     Q1 = y_m + y_std*(1/(torch.sqrt(torch.abs(2*np.pi*y_std*y_std))))*torch.exp(-(y1-y_m)*(y1-y_m)/(2*y_std*y_std))
-    Hell_dists = torch.pow(torch.sqrt(torch.abs(P1)) - torch.sqrt(torch.abs(Q1)),2).sum(2)
+    num_hell_dists = torch.pow(torch.sqrt(torch.abs(P1)) - torch.sqrt(torch.abs(Q1)),2).sum(2)
 
-    return Hell_dists/ _SQRT2
+    return num_hell_dists/ _SQRT2
