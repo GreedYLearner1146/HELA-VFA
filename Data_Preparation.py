@@ -62,24 +62,26 @@ from easyfsl.utils import plot_images, sliding_average
 ###############################################################################################
 # DATA PREPARATION PART.
 # We use miniImageNet as an example as the subsequent codes for the
-# respective outputs can be illustrated in a smooth manner. The same steps goes for the other datasets.
+# respective outputs can be illustrated in a smooth manner. 
+# The same steps goes for the other datasets.
 
 def natural_sort_key(s, _nsre=re.compile('([0-9]+)')):
    return[int(text) if text.isdigit() else text.lower() for text in _nsre.split(s   )]
 
-path = 'path to image file set here'
+path = 'path to miniimagenet files here'
 
 files_list_miniImageNet = []
 for filename in sorted(os.listdir(path),key=natural_sort_key):
     files_list_miniImageNet.append(filename)
 
 # Shuffle the list for randomization of the dataset.
-random.seed(500)  
+
+random.seed(500)  # Set to __ first. Change to __ after training as part of the fine-tuning steps.
 shuffled = random.sample(files_list_miniImageNet,len(files_list_miniImageNet))
 
 def get_training_and_test_sets(file_list):
-    split = 0.80
-    split_index = floor(len(file_list) * split)
+    split = 0.80                                    # This simulation fused the training and validation class together.
+    split_index = floor(len(file_list) * split)     # Testing classes remains at 20.
     # Training.
     training = file_list[:split_index]
     # Valid.
@@ -88,32 +90,29 @@ def get_training_and_test_sets(file_list):
 
 trainlist_final, testlist_final = get_training_and_test_sets(shuffled)
 
-
-def natural_sort_key(s, _nsre=re.compile('([0-9]+)')):
-   return[int(text) if text.isdigit() else text.lower() for text in _nsre.split(s)]
-
 ########################### Load Images (size 84 x 84) ##############################
+
 def load_images(path, size = (84,84)):
     data_list = list()# enumerate filenames in directory, assume all are images
     for filename in sorted(os.listdir(path),key=natural_sort_key):
-      pixels = load_img(path + filename, target_size = size)# Convert to numpy array.
+      pixels = load_img(path + filename, target_size = size) 
       pixels = img_to_array(pixels).astype('float32')
-      pixels = cv2.resize(pixels,(84,84))# Need to resize images first, otherwise RAM will run out of space.
+      pixels = cv2.resize(pixels,(84,84)) 
       pixels = pixels/255
       data_list.append(pixels)
     return asarray(data_list)
+
+############# Train, test images in array list format ##################
 
 train_img = []
 for train in trainlist_final:
    data_train_img = load_images(path + '/' + train + '/')
    train_img.append(data_train_img)
 
-############# Train, test images in array list format ##################
-
 TRAIN = []
 
 for i in range (len(train_img)):
-   TRAIN.append(train_img[i][0:600])
+   TRAIN.append(train_img[i][0:600])   # Each train, valid and test class has 600 images. 
 
 test_img = []
 
@@ -154,48 +153,6 @@ for e,f in zip(test_img_final,test_label_final):
 ################## shuffle #############################
 
 from sklearn.utils import shuffle
-train_array = shuffle(train_array)
-test_array = shuffle(test_array)
-
-new_X_train = [x[0] for x in train_array]
-new_y_train = [x[1] for x in train_array]
-
-new_X_test = [x[0] for x in test_array]
-new_y_test = [x[1] for x in test_array]
-
-############# Train, test images + labels in array list format ##################
-
-train_img_FINAL = []
-test_img_FINAL = []
-
-train_label_FINAL = []
-test_label_FINAL = []
-
-for a in range (len(TRAIN)):
-   for b in range (600):
-      train_img_FINAL.append(train_img[a][b])
-      train_label_FINAL.append(a)
-
-#############################################################################
-
-for e in range (len(test_img)):
-  for f in range (600):
-      test_img_FINAL.append(test_img[e][f])
-      test_label_FINAL.append(e+80)
-
-############# Reassemble in tuple format. ##################
-
-train_array = []
-test_array = []
-
-for a,b in zip(train_img_FINAL,train_label_FINAL):
-  train_array.append((a,b))
-
-for e,f in zip(test_img_FINAL,test_label_FINAL):
-  test_array.append((e,f))
-
-################## shuffle #############################
-
 train_array = shuffle(train_array)
 test_array = shuffle(test_array)
 
