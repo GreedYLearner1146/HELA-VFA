@@ -25,15 +25,12 @@ class HELA_VFA(nn.Module):
                 for label in range(n_way)
             ]
         )
-        # Compute the EUCLIDEAN distance from queries to prototypes
-        dists = hellinger(z_query, z_proto)
+        # Compute the HELLINGER distance from queries to prototypes
+        dists = Hellinger_dist(z_query, z_proto)
 
         # And here is the super complicated operation to transform those distances into classification scores!
         scores = -dists
         return scores
 
-from easyfsl.modules import resnet12
-
 convolutional_network_output = resnet12()
-convolutional_network_output.fc = nn.Flatten()
 model = HELA_VFA(convolutional_network_output).cuda()
