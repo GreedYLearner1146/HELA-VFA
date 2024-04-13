@@ -1,3 +1,29 @@
+
+################# Hyperparameters ############################################
+N_TRAINING_EPISODES = 80000 
+N_VALIDATION_TASKS = 100
+
+train_dataset.get_labels = lambda: [instance[1] for instance in train_dataset]
+
+train_sampler = TaskSampler(
+    train_dataset, n_way=N_WAY, n_shot=N_SHOT, n_query=N_QUERY, n_tasks=N_TRAINING_EPISODES
+)
+
+########## Train loader #############
+train_loader = DataLoader(
+    train_dataset,
+    batch_sampler=train_sampler,
+    num_workers=12,
+    pin_memory=True,
+    collate_fn=train_sampler.episodic_collate_fn,
+)
+
+######################### Cross-entropy loss. #################################################
+criterion1 = nn.CrossEntropyLoss()                      # Cross entropy loss as first loss.
+optimizer = optim.Adam(model.parameters(), lr=0.001)    # Optimizer with learning rate of 1e-3.
+
+############################### Model fit function ############################################
+
 def fit(
     support_images: torch.Tensor,
     support_labels: torch.Tensor,
