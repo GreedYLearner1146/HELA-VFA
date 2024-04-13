@@ -76,6 +76,7 @@ for filename in sorted(os.listdir(path),key=natural_sort_key):
 
 # Shuffle the list for randomization of the dataset.
 
+random.seed(10)
 shuffled = random.sample(files_list_miniImageNet,len(files_list_miniImageNet))
 
 def get_training_and_test_sets(file_list):
