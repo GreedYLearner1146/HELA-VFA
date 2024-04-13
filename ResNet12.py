@@ -1,5 +1,4 @@
 from typing import List, Optional, Type, Union
-import torch
 from torch import Tensor, nn
 import torch.nn as nn
 import torch
