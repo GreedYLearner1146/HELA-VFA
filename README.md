@@ -16,7 +16,7 @@ The link to our paper can be found at https://openaccess.thecvf.com/content/WACV
 
 ## Preliminary Results (For miniImageNet) ##
 
-The selected methods (in the paper) are evaluated on the miniImageNet and are based on the approaches by Roy et.al. `FeLMi : Few shot Learning with hard Mixup' [1]. For the tabulated results on CIFAR-FS, tieredImageNet and FC-100, please see our original conference paper. The few-shot evaluation utilized are the 5-way-1-shot and 5-way-5-shot approach. 
+The selected methods (in the paper) are evaluated on the miniImageNet and are based on the approaches by Roy et.al. `FeLMi : Few shot Learning with hard Mixup' [1]. For the tabulated results on CIFAR-FS, tieredImageNet and FC-100, please see our original conference paper. The respective codes for the other datasets may be available in the future. The few-shot evaluation utilized are the 5-way-1-shot and 5-way-5-shot approach. 
 
 | Method | 5-way-1-shot (%) | 5-way-5-shot (%) |
 | ------ | ------| ------| 
@@ -38,7 +38,7 @@ The codes instructions presented in this github utilized miniImageNet as an exam
 9) Run the sub-functions contained in the folder Hesim, which comprise the codes for the various helper functions leading up to the Hesim loss function as highlighted in our paper. The helper functions are mainly adapted from the pytorch metric learning library by Kevin Musgrave: https://github.com/KevinMusgrave/pytorch-metric-learning. 
 10) Run model_train.py to train the model.
 11) Run evaluate.py to see how the model performed before the training.
-12) Finally, fune-tune the trained model via repeating step 1-6, and evaluate the model again.
+12) Finally, fine-tune the trained model via repeating step 1-6, and evaluate the model again.
 
 ## Additional Remarks ##
 For the Hesim code file, please run the functions in the following orders: Common_functions.py -> loss_and_miners_utils.py -> Module_With_Records.py -> Base_Reducers.py -> MeanReducer.py -> MultipleReducers_Do_Nothing_Reducers.py -> BaseDistances.py -> LpDistance.py -> ModulesWithRecordsandReducer.py -> Mixins.py -> BaseMetricLossFunction.py -> GenericPairLoss.py -> HesimLoss.py
