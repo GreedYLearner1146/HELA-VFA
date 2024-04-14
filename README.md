@@ -41,7 +41,7 @@ The codes instructions presented in this github utilized miniImageNet as an exam
 12) Finally, fine-tune the trained model via fine-tune.py.
 
 ## Additional Remarks ##
-For the Hesim code file, please run the functions in the following orders: Common_functions.py -> loss_and_miners_utils.py -> Module_With_Records.py -> Base_Reducers.py -> MeanReducer.py -> MultipleReducers_Do_Nothing_Reducers.py -> BaseDistances.py -> LpDistance.py -> ModulesWithRecordsandReducer.py -> Mixins.py -> BaseMetricLossFunction.py -> GenericPairLoss.py -> HesimLoss.py
+For the Hesim code file, please run the functions in the following orders: Common_functions.py -> loss_and_miners_utils.py -> Module_With_Records.py -> Base_Reducers.py -> MeanReducer.py -> MultipleReducers_Do_Nothing_Reducers.py -> BaseDistances.py -> LpDistance.py -> ModulesWithRecordsandReducer.py -> Mixins.py -> BaseMetricLossFunction.py -> GenericPairLoss.py -> HesimLoss.py.
 
 # Training weights for miniImageNet ##
 
