@@ -6,7 +6,7 @@ for filename in sorted(os.listdir(path),key=natural_sort_key):
 shuffled = random.sample(files_list_miniImageNet,len(files_list_miniImageNet))
 
 def fine_tune_datasets(file_list):  # Between valid and test 
-    split = 0.80
+    split = 0.50
     split_index = floor(len(file_list) * split)
     training = file_list[:split_index]
     validation = file_list[split_index:]
