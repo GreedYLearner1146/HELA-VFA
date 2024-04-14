@@ -3,15 +3,10 @@
 from torchvision import transforms
 from torchvision.transforms import v2
 
-from torchvision.transforms import (
-    Compose,
-    RandomApply,
-    RandomHorizontalFlip,
-    RandomRotation,
-    RandomVerticalFlip,
-)
+################################ The main ART-HELANet Codes #################################
+################# We emphasize the role of data augmentation here. ##########################
 
-# The data augmentation selected for the train datasets are as below.
+# The data augmentation selected for the train, valid and test datasets are as below.
 
 data_transform = transforms.Compose(
 
@@ -26,8 +21,13 @@ data_transform = transforms.Compose(
             transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
        ])
 
+data_transform_valid = transforms.Compose(
 
-# The pre-processing procedure selected for the test datasets are as below.
+      [
+        transforms.ToTensor(),
+        transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                                 std=[0.229, 0.224, 0.225])
+       ])
 
 data_transform_test = transforms.Compose(
 
