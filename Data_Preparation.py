@@ -68,7 +68,7 @@ from easyfsl.utils import plot_images, sliding_average
 def natural_sort_key(s, _nsre=re.compile('([0-9]+)')):
    return[int(text) if text.isdigit() else text.lower() for text in _nsre.split(s   )]
 
-path = 'path to miniimagenet files here'
+path = '/content/drive/MyDrive/miniImageNet_HELAVFA/miniImageNet/'
 
 files_list_miniImageNet = []
 for filename in sorted(os.listdir(path),key=natural_sort_key):
@@ -76,43 +76,64 @@ for filename in sorted(os.listdir(path),key=natural_sort_key):
 
 # Shuffle the list for randomization of the dataset.
 
-random.seed(10)
 shuffled = random.sample(files_list_miniImageNet,len(files_list_miniImageNet))
 
-def get_training_and_test_sets(file_list):
-    split = 0.80                                    # This simulation fused the training and validation class together.
-    split_index = floor(len(file_list) * split)     # Testing classes remains at 20.
+# For training and validation data splitting.
+
+def get_training_and_valid_sets(file_list):
+    split = 0.64
+    split_index = floor(len(file_list) * split)
     # Training.
     training = file_list[:split_index]
     # Valid.
     validation = file_list[split_index:]
     return training, validation
 
-trainlist_final, testlist_final = get_training_and_test_sets(shuffled)
+trainlist_final,_ = get_training_and_valid_sets(shuffled)
+_,vallist = get_training_and_valid_sets(shuffled)
+
+# For validation and test data splitting.
+
+def get_validation_and_testing_sets(file_list):
+    split = 0.5  # halved-halved
+    split_index = floor(len(file_list) * split)
+    # Final valid.
+    valid = file_list[:split_index]
+    # Final test.
+    test = file_list[split_index:]
+    return valid, test
+
+vallist_final,_ = get_validation_and_testing_sets(vallist)
+_,testlist_final = get_validation_and_testing_sets(vallist)
 
 ########################### Load Images (size 84 x 84) ##############################
-
 def load_images(path, size = (84,84)):
     data_list = list()# enumerate filenames in directory, assume all are images
     for filename in sorted(os.listdir(path),key=natural_sort_key):
-      pixels = load_img(path + filename, target_size = size) 
+      pixels = load_img(path + filename, target_size = size)# Convert to numpy array.
       pixels = img_to_array(pixels).astype('float32')
-      pixels = cv2.resize(pixels,(84,84)) 
+      pixels = cv2.resize(pixels,(84,84))# Need to resize images first, otherwise RAM will run out of space.  # SET SIZE TO 22??
       pixels = pixels/255
       data_list.append(pixels)
     return asarray(data_list)
-
-############# Train, test images in array list format ##################
 
 train_img = []
 for train in trainlist_final:
    data_train_img = load_images(path + '/' + train + '/')
    train_img.append(data_train_img)
 
+############# Train, valid, test images in array list format ##################
+
 TRAIN = []
 
 for i in range (len(train_img)):
-   TRAIN.append(train_img[i][0:600])   # Each train, valid and test class has 600 images. 
+   TRAIN.append(train_img[i][0:600])
+
+val_img = []
+
+for val in vallist_final:
+   data_val_img = load_images(path + '/' + val + '/')
+   val_img.append(data_val_img)
 
 test_img = []
 
@@ -120,32 +141,43 @@ for test in testlist_final:
    data_test_img = load_images(path + '/' + test + '/')
    test_img.append(data_test_img)
 
-############# Train, test images + labels in array list format ##################
+############# Train, valid, test images + labels in array list format ##################
 
 train_img_final = []
+val_img_final = []
 test_img_final = []
 
 train_label_final = []
+val_label_final = []
 test_label_final = []
 
 
 for a in range (len(TRAIN)):
    for b in range (600):
       train_img_final.append(train_img[a][b])
-      train_label_final.append(a)
+      train_label_final.append(a)  # 60 classes.
+
+for c in range (len(val_img)):
+   for d in range (600):
+      val_img_final.append(val_img[c][d])
+      val_label_final.append(c+60)  # rest of the 20 classes.
 
 for e in range (len(test_img)):
   for f in range (600):
       test_img_final.append(test_img[e][f])
-      test_label_final.append(e+80)
+      test_label_final.append(e+80)  # Remaining 20 classes.
 
 ############# Reassemble in tuple format. ##################
 
 train_array = []
+val_array = []
 test_array = []
 
 for a,b in zip(train_img_final,train_label_final):
   train_array.append((a,b))
+
+for c,d in zip(val_img_final,val_label_final):
+  val_array.append((c,d))
 
 for e,f in zip(test_img_final,test_label_final):
   test_array.append((e,f))
@@ -159,10 +191,19 @@ test_array = shuffle(test_array)
 new_X_train = [x[0] for x in train_array]
 new_y_train = [x[1] for x in train_array]
 
+new_X_val = [x[0] for x in val_array]
+new_y_val = [x[1] for x in val_array]
+
 new_X_test = [x[0] for x in test_array]
 new_y_test = [x[1] for x in test_array]
 
-################### Check shape of each image and label array ########################
+################## Check shape of array ####################
 
-print(np.shape(new_X_train), np.shape(new_y_train))
-print(np.shape(new_X_test), np.shape(new_y_test))
+print(np.shape(new_X_train))
+print(np.shape(new_y_train))
+
+print(np.shape(new_X_val))
+print(np.shape(new_y_val))
+
+print(np.shape(new_X_test))
+print(np.shape(new_y_test))
