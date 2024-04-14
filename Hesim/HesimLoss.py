@@ -45,9 +45,9 @@ class HesimLoss(GenericPairLoss):
 
             max_val = torch.max(
                 pos_pairs, torch.max(neg_pairs, dim=1, keepdim=True)[0]
-            ).detach()
-            numerator = torch.exp(torch.sqrt(torch.abs(pos_pairs)) - torch.sqrt(torch.abs(max_val))).squeeze(1)   # Hellinger similarity.
-            denominator = torch.sum(torch.exp(torch.sqrt(torch.abs(neg_pairs)) - torch.sqrt(torch.abs(max_val))), dim=1) + numerator  # Hellinger similarity.
+            ).detach()    # Hellinger similarity.
+            numerator = torch.exp(torch.sqrt(torch.abs(pos_pairs)) - torch.sqrt(torch.abs(max_val))).squeeze(1)   
+            denominator = torch.sum(torch.exp(torch.sqrt(torch.abs(neg_pairs)) - torch.sqrt(torch.abs(max_val))), dim=1) + numerator  
             log_exp = torch.log((numerator / denominator) + small_val(dtype))
             return {
                 "loss": {
