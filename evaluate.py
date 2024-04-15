@@ -47,11 +47,3 @@ def evaluate(data_loader: DataLoader):
     print(
         f"Model tested on {len(data_loader)} tasks. Accuracy: {(100 * correct_predictions/total_predictions):.2f}%"
     )
-
-############################### Get first 10 values via the lines below #######################################
-
-Eval = []
-
-for i in range (10):
-    E = evaluate(test_loader)
-    Eval.append(E)
