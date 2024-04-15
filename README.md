@@ -43,7 +43,7 @@ The codes instructions presented in this github utilized miniImageNet as an exam
 ## Additional Remarks ##
 For the Hesim code file, please run the functions in the following orders: Common_functions.py -> loss_and_miners_utils.py -> Module_With_Records.py -> Base_Reducers.py -> MeanReducer.py -> MultipleReducers_Do_Nothing_Reducers.py -> BaseDistances.py -> LpDistance.py -> ModulesWithRecordsandReducer.py -> Mixins.py -> BaseMetricLossFunction.py -> GenericPairLoss.py -> HesimLoss.py.
 
-# Training weights for miniImageNet ##
+## Training weights for miniImageNet ##
 
 The pytorch training weights (in .pth) for the 1-shot and 5-shot setting can be found in https://drive.google.com/drive/folders/1lLuxzeDLcWOXH7FXctuibjZnY3Be0gJp?usp=sharing. 
 
