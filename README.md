@@ -34,7 +34,7 @@ The codes instructions presented in this github utilized miniImageNet as an exam
 5) Run the dataloader.py, which contains the dataloader for the training and testing set.
 6) Run the Hellinger_dist.py
 7) Run the HELA_VFA_main.py
-8) Run test_sampler_loader.py, which contains the hyperparameters N_SHOT, N_WAY, N_QUERY, and number of evaluation task which can be easily configured.
+8) Run sampler_loader.py, which contains the hyperparameters N_SHOT, N_WAY, N_QUERY, and number of evaluation task which can be easily configured.
 9) Run the sub-functions contained in the folder Hesim, which comprise the codes for the various helper functions leading up to the Hesim loss function as highlighted in our paper. The helper functions are mainly adapted from the pytorch metric learning library by Kevin Musgrave: https://github.com/KevinMusgrave/pytorch-metric-learning. 
 10) Run model_train.py to train the model.
 11) Run evaluate.py to see how the model performed before fine-tuning.
