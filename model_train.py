@@ -1,34 +1,20 @@
 
 ################# Hyperparameters ############################################
-
-N_TRAINING_EPISODES = 80000 # 80000,200000
+N_TRAINING_EPISODES = 80000 
 N_VALIDATION_TASKS = 100
 
+####################### train-sampler ############################################
 train_dataset.get_labels = lambda: [instance[1] for instance in train_dataset]
-val_dataset.get_labels = lambda: [instance[1] for instance in val_dataset]
 
 train_sampler = TaskSampler(
     train_dataset, n_way=N_WAY, n_shot=N_SHOT, n_query=N_QUERY, n_tasks=N_TRAINING_EPISODES
 )
 
-val_sampler = TaskSampler(
-    val_dataset, n_way=N_WAY, n_shot=N_SHOT, n_query=N_QUERY, n_tasks=N_TRAINING_EPISODES
-)
-
 ########## Train loader #############
+
 train_loader = DataLoader(
     train_dataset,
     batch_sampler=train_sampler,
-    num_workers=12,
-    pin_memory=True,
-    collate_fn=train_sampler.episodic_collate_fn,
-)
-
-########## Val loader #############
-
-val_loader = DataLoader(
-    val_dataset,
-    batch_sampler=val_sampler,
     num_workers=12,
     pin_memory=True,
     collate_fn=train_sampler.episodic_collate_fn,
@@ -54,7 +40,6 @@ def fit(
     loss1 = criterion1(classification_scores, query_labels.cuda())
     loss2 = Hesimloss(classification_scores, query_labels.cuda())
     loss = loss1 + 0.5*loss2 
-    loss = loss1
     loss.backward()
     optimizer.step()
 
