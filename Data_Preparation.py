@@ -65,17 +65,21 @@ from easyfsl.utils import plot_images, sliding_average
 # respective outputs can be illustrated in a smooth manner. 
 # The same steps goes for the other datasets.
 
+###############################################################################################
+# DATA PREPARATION PART.
+# We use miniImageNet as an example as the subsequent codes for the
+# respective outputs can be illustrated in a smooth manner. The same steps goes for the other datasets.
+
 def natural_sort_key(s, _nsre=re.compile('([0-9]+)')):
    return[int(text) if text.isdigit() else text.lower() for text in _nsre.split(s   )]
 
-path = '/content/drive/MyDrive/miniImageNet_HELAVFA/miniImageNet/'
+path = 'path to miniImageNet here'
 
 files_list_miniImageNet = []
 for filename in sorted(os.listdir(path),key=natural_sort_key):
     files_list_miniImageNet.append(filename)
 
 # Shuffle the list for randomization of the dataset.
-
 shuffled = random.sample(files_list_miniImageNet,len(files_list_miniImageNet))
 
 # For training and validation data splitting.
@@ -92,19 +96,6 @@ def get_training_and_valid_sets(file_list):
 trainlist_final,_ = get_training_and_valid_sets(shuffled)
 _,vallist = get_training_and_valid_sets(shuffled)
 
-# For validation and test data splitting.
-
-def get_validation_and_testing_sets(file_list):
-    split = 0.5  # halved-halved
-    split_index = floor(len(file_list) * split)
-    # Final valid.
-    valid = file_list[:split_index]
-    # Final test.
-    test = file_list[split_index:]
-    return valid, test
-
-vallist_final,_ = get_validation_and_testing_sets(vallist)
-_,testlist_final = get_validation_and_testing_sets(vallist)
 
 ########################### Load Images (size 84 x 84) ##############################
 def load_images(path, size = (84,84)):
@@ -122,7 +113,7 @@ for train in trainlist_final:
    data_train_img = load_images(path + '/' + train + '/')
    train_img.append(data_train_img)
 
-############# Train, valid, test images in array list format ##################
+############# Train, valid images in array list format ##################
 
 TRAIN = []
 
@@ -131,47 +122,34 @@ for i in range (len(train_img)):
 
 val_img = []
 
-for val in vallist_final:
+for val in vallist:
    data_val_img = load_images(path + '/' + val + '/')
    val_img.append(data_val_img)
 
-test_img = []
 
-for test in testlist_final:
-   data_test_img = load_images(path + '/' + test + '/')
-   test_img.append(data_test_img)
-
-############# Train, valid, test images + labels in array list format ##################
+############# Train, valid images + labels in array list format ##################
 
 train_img_final = []
 val_img_final = []
-test_img_final = []
 
 train_label_final = []
 val_label_final = []
-test_label_final = []
-
 
 for a in range (len(TRAIN)):
-   for b in range (600):
+   for b in range (600):  # Each class has 600 images.
       train_img_final.append(train_img[a][b])
-      train_label_final.append(a)  # 60 classes.
+      train_label_final.append(a)
 
 for c in range (len(val_img)):
-   for d in range (600):
+   for d in range (600):   # Each class has 600 images.
       val_img_final.append(val_img[c][d])
-      val_label_final.append(c+60)  # rest of the 20 classes.
+      val_label_final.append(c+60)
 
-for e in range (len(test_img)):
-  for f in range (600):
-      test_img_final.append(test_img[e][f])
-      test_label_final.append(e+80)  # Remaining 20 classes.
 
 ############# Reassemble in tuple format. ##################
 
 train_array = []
 val_array = []
-test_array = []
 
 for a,b in zip(train_img_final,train_label_final):
   train_array.append((a,b))
@@ -179,31 +157,14 @@ for a,b in zip(train_img_final,train_label_final):
 for c,d in zip(val_img_final,val_label_final):
   val_array.append((c,d))
 
-for e,f in zip(test_img_final,test_label_final):
-  test_array.append((e,f))
-
 ################## shuffle #############################
 
 from sklearn.utils import shuffle
 train_array = shuffle(train_array)
-test_array = shuffle(test_array)
+val_array = shuffle(val_array)
 
 new_X_train = [x[0] for x in train_array]
 new_y_train = [x[1] for x in train_array]
 
 new_X_val = [x[0] for x in val_array]
 new_y_val = [x[1] for x in val_array]
-
-new_X_test = [x[0] for x in test_array]
-new_y_test = [x[1] for x in test_array]
-
-################## Check shape of array ####################
-
-print(np.shape(new_X_train))
-print(np.shape(new_y_train))
-
-print(np.shape(new_X_val))
-print(np.shape(new_y_val))
-
-print(np.shape(new_X_test))
-print(np.shape(new_y_test))
