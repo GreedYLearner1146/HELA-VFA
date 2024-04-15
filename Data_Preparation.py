@@ -62,12 +62,6 @@ from easyfsl.utils import plot_images, sliding_average
 ###############################################################################################
 # DATA PREPARATION PART.
 # We use miniImageNet as an example as the subsequent codes for the
-# respective outputs can be illustrated in a smooth manner. 
-# The same steps goes for the other datasets.
-
-###############################################################################################
-# DATA PREPARATION PART.
-# We use miniImageNet as an example as the subsequent codes for the
 # respective outputs can be illustrated in a smooth manner. The same steps goes for the other datasets.
 
 def natural_sort_key(s, _nsre=re.compile('([0-9]+)')):
