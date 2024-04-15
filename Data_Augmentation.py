@@ -3,10 +3,16 @@
 from torchvision import transforms
 from torchvision.transforms import v2
 
-################################ The main ART-HELANet Codes #################################
-################# We emphasize the role of data augmentation here. ##########################
 
-# The data augmentation selected for the train, valid and test datasets are as below.
+from torchvision.transforms import (
+    Compose,
+    RandomApply,
+    RandomHorizontalFlip,
+    RandomRotation,
+    RandomVerticalFlip,
+)
+
+# The data augmentation selected for the train and valid and test datasets are as below.
 
 data_transform = transforms.Compose(
 
@@ -21,15 +27,7 @@ data_transform = transforms.Compose(
             transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
        ])
 
-data_transform_valid = transforms.Compose(
-
-      [
-        transforms.ToTensor(),
-        transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                                 std=[0.229, 0.224, 0.225])
-       ])
-
-data_transform_test = transforms.Compose(
+data_transform_valtest = transforms.Compose(
 
       [
         transforms.ToTensor(),
@@ -38,6 +36,7 @@ data_transform_test = transforms.Compose(
        ])
 
 import torchvision.transforms as T
+import torch
 
 # Based on the Augmentation procedure laid out in the simCLR paper, as our Hesim loss function has an analogous structure. #
 
