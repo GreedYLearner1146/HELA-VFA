@@ -89,3 +89,11 @@ example_scores = model(
 
 _, example_predicted_labels = torch.max(example_scores.data, 1)
 testlabels = [instance[1] for instance in test_dataset]
+
+############################### First 10 classification accuracy values ##########################
+
+Eval = []
+
+for i in range (10):
+    E = evaluate(test_loader)
+    Eval.append(E)
