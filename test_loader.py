@@ -1,4 +1,4 @@
-#random.seed(1)   # For 1-shot learning
+random.seed(1)   # For 1-shot learning
 random.seed(10) # For 5-shot learning
 
 # Recall we have the training and valid splits, now we do the valid and test split.
