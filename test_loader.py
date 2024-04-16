@@ -6,7 +6,6 @@ trainlist_final,_ = get_training_and_valid_sets(shuffled)
 _,vallist = get_training_and_valid_sets(shuffled)
 
 # Recall we have the training and valid splits, now we do the valid and test split.
-# For validation and test data splitting.
 
 def get_valid_and_test_sets(file_list):
     split = 0.50           # 20 class set as test. 
