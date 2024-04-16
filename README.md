@@ -38,7 +38,7 @@ The codes instructions presented in this github utilized miniImageNet as an exam
 9) Run the sub-functions contained in the folder Hesim, which comprise the codes for the various helper functions leading up to the Hesim loss function as highlighted in our paper. The helper functions are mainly adapted from the pytorch metric learning library by Kevin Musgrave: https://github.com/KevinMusgrave/pytorch-metric-learning. 
 10) Run model_train.py to train the model.
 11) Run evaluate.py that contains the function for evaluation.
-12) Finally, run test_loader.py to output the classification scores (in %) for the meta-test dataset.
+12) Finally, run test_loader.py to evaluate for the meta-test dataset.
 
 ## Additional Remarks ##
 For the Hesim code file, please run the functions in the following orders: Common_functions.py -> loss_and_miners_utils.py -> Module_With_Records.py -> Base_Reducers.py -> MeanReducer.py -> MultipleReducers_Do_Nothing_Reducers.py -> BaseDistances.py -> LpDistance.py -> ModulesWithRecordsandReducer.py -> Mixins.py -> BaseMetricLossFunction.py -> GenericPairLoss.py -> HesimLoss.py.
