@@ -1,8 +1,6 @@
-random.seed(1)   # For 1-shot learning.
-random.seed(10) # For 5-shot learning.
+random.seed(10) 
 
 shuffled = random.sample(files_list_miniImageNet,len(files_list_miniImageNet))
-trainlist_final,_ = get_training_and_valid_sets(shuffled)
 _,vallist = get_training_and_valid_sets(shuffled)
 
 # Recall we have the training and valid splits, now we do the valid and test split.
@@ -11,10 +9,10 @@ def get_valid_and_test_sets(file_list):
     split = 0.50           
     split_index = floor(len(file_list) * split)
     # valid.
-    training = file_list[:split_index]
+    validation = file_list[:split_index]
     # test.
-    validation = file_list[split_index:]
-    return training, validation
+    testing = file_list[split_index:]
+    return validation, testing
 
 validlist_final,_ = get_valid_and_test_sets(vallist)
 _,testlist_final = get_valid_and_test_sets(vallist)
