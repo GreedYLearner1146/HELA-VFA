@@ -73,7 +73,7 @@ files_list_miniImageNet = []
 for filename in sorted(os.listdir(path),key=natural_sort_key):
     files_list_miniImageNet.append(filename)
 
-shuffled = random.sample(files_list_miniImageNet,len(files_list_miniImageNet))
+shuffle = random.sample(files_list_miniImageNet,len(files_list_miniImageNet))
 
 # For training and validation data splitting.
 
@@ -86,8 +86,8 @@ def get_training_and_valid_sets(file_list):
     validation = file_list[split_index:]
     return training, validation
 
-trainlist_final,_ = get_training_and_valid_sets(shuffled)
-_,vallist = get_training_and_valid_sets(shuffled)
+trainlist_final,_ = get_training_and_valid_sets(shuffle)
+_,vallist = get_training_and_valid_sets(shuffle)
 
 
 ########################### Load Images (size 84 x 84) ##############################
