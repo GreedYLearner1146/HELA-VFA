@@ -108,7 +108,7 @@ class Bottleneck(nn.Module):
         return out
 
 
-class ResNet(nn.Module):                         # 32, 64, 128, 256        # 512
+class ResNet(nn.Module):                    
 
     def __init__(self, block, layers, widths=[32, 64, 128, 256], feature_dim=512, num_classes=1000, projection=False, zero_init_residual=False, drop_rate=0, use_fc=False):
         super(ResNet, self).__init__()
