@@ -73,7 +73,6 @@ files_list_miniImageNet = []
 for filename in sorted(os.listdir(path),key=natural_sort_key):
     files_list_miniImageNet.append(filename)
 
-# Shuffle the list for randomization of the dataset.
 shuffled = random.sample(files_list_miniImageNet,len(files_list_miniImageNet))
 
 # For training and validation data splitting.
