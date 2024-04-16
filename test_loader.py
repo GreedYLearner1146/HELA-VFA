@@ -1,9 +1,9 @@
 random.seed(1)   # For 1-shot learning.
 random.seed(10) # For 5-shot learning.
 
-shuffled = random.sample(files_list_miniImageNet,len(files_list_miniImageNet))
-trainlist_final,_ = get_training_and_valid_sets(shuffled)
-_,vallist = get_training_and_valid_sets(shuffled)
+shuffle = random.sample(files_list_miniImageNet,len(files_list_miniImageNet))
+trainlist_final,_ = get_training_and_valid_sets(shuffle)
+_,vallist = get_training_and_valid_sets(shuffle)
 
 # Recall we have the training and valid splits, now we do the valid and test split.
 
