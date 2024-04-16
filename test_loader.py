@@ -8,7 +8,7 @@ _,vallist = get_training_and_valid_sets(shuffled)
 # Recall we have the training and valid splits, now we do the valid and test split.
 
 def get_valid_and_test_sets(file_list):
-    split = 0.50           # 20 class set as test. 
+    split = 0.50           
     split_index = floor(len(file_list) * split)
     # valid.
     training = file_list[:split_index]
