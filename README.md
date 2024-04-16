@@ -16,7 +16,7 @@ The link to our paper can be found at https://openaccess.thecvf.com/content/WACV
 
 ## Preliminary Results (For miniImageNet) ##
 
-The selected methods (in the paper) are evaluated on the miniImageNet and are based on the approaches by Roy et.al. `FeLMi : Few shot Learning with hard Mixup' [1]. For the tabulated results on CIFAR-FS, tieredImageNet and FC-100, please see our original conference paper. The respective codes for the other datasets may be available in the future. The few-shot evaluation utilized are the 5-way-1-shot and 5-way-5-shot approach. 
+The selected methods (in the paper) are based on the approaches by Roy et.al. `FeLMi : Few shot Learning with hard Mixup' [1]. For the tabulated results on CIFAR-FS, tieredImageNet and FC-100, please see our original conference paper. The respective codes for the other datasets may be available in the future. The few-shot evaluation utilized are the 5-way-1-shot and 5-way-5-shot approach. 
 
 | Method | 5-way-1-shot (%) | 5-way-5-shot (%) |
 | ------ | ------| ------| 
@@ -25,7 +25,7 @@ The selected methods (in the paper) are evaluated on the miniImageNet and are ba
 The backbone for our HELA-VFA is the ResNet-12.
 
 ## Code Instructions ##
-The codes instructions presented in this github utilized miniImageNet as an example. For the other datasets, simply download them and change the address path.
+The codes instructions presented in this github utilized miniImageNet as an example. Instructions for other dataset may be uploaded in the future.
 
 1) Run the Data_Preparation.py, which consists of the library packages, as well as the train-test split. The casting of the images into the respective array format are also performed.
 2) Run the Data_Augmentation.py, which contains the essential transformations for data augmentation. These include horizontal and vertical flips, as well as rotations by 90 and 270 degrees, all at a probability of 0.5 (p = 0.5).
