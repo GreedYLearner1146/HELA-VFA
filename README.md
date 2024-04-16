@@ -25,7 +25,7 @@ The selected methods (in the paper) are based on the approaches by Roy et.al. `F
 The backbone for our HELA-VFA is the ResNet-12.
 
 ## Code Instructions ##
-The codes instructions presented in this github utilized miniImageNet as an example. Instructions for other dataset may be uploaded in the future.
+The codes instructions presented in this github utilized miniImageNet as an example. Instructions for other dataset may be uploaded in the future. Link to the folder for the miniImageNet dataset that we performed our simulation on : https://drive.google.com/drive/folders/1X8Bvfteog9eENSW5flcdc_D09QYBaoMJ?usp=drive_link 
 
 1) Run the Data_Preparation.py, which consists of the library packages, as well as the train-test split. The casting of the images into the respective array format are also performed.
 2) Run the Data_Augmentation.py, which contains the essential transformations for data augmentation. These include horizontal and vertical flips, as well as rotations by 90 and 270 degrees, all at a probability of 0.5 (p = 0.5).
