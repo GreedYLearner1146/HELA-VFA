@@ -97,7 +97,7 @@ def load_images(path, size = (84,84)):
     for filename in sorted(os.listdir(path),key=natural_sort_key):
       pixels = load_img(path + filename, target_size = size)# Convert to numpy array.
       pixels = img_to_array(pixels).astype('float32')
-      pixels = cv2.resize(pixels,(84,84))# Need to resize images first, otherwise RAM will run out of space.  # SET SIZE TO 22??
+      pixels = cv2.resize(pixels,(84,84))
       pixels = pixels/255
       data_list.append(pixels)
     return asarray(data_list)
