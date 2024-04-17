@@ -8,7 +8,7 @@ challenges, and more recently variational inference-based approaches are incorpo
 
 We utilized the Sicara few-shot library package for running our few-shot algorithm. Link to the Sicara Few-Shot github page: https://github.com/sicara/easy-few-shot-learning.
 
-All codes here are presented in **PyTorch** format.
+All codes that is and will be shown here are presented in **PyTorch** format.
 
 The link to our paper can be found at https://openaccess.thecvf.com/content/WACV2024/papers/Lee_HELA-VFA_A_Hellinger_Distance-Attention-Based_Feature_Aggregation_Network_for_Few-Shot_Classification_WACV_2024_paper.pdf 
 
