@@ -1,6 +1,6 @@
 ## HELA-VFA (A HELlinger distance-Attention-based Variational Feature Aggregation Network) ##
 
-This repository contains the relevant codes for our work on `**HELA-VFA: A Hellinger Distance-Attention-based Feature Aggregation
+This preliminary repository contains the relevant codes for our work on `**HELA-VFA: A Hellinger Distance-Attention-based Feature Aggregation
 Network for Few-Shot Classification**' (Appeared on IEEE/CVF Winter Conference on Applications of Computer Vision (WACV 24)).
 
 **Abstract**: Enabling effective learning using only a few presented examples is a crucial but difficult computer vision objective. Few-shot learning have been proposed to address the
