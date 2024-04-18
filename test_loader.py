@@ -1,9 +1,11 @@
-random.seed(10) 
+random.seed(500) 
 
+# Same type of train-val class split as in Data_Preparation.py.
 shuffled = random.sample(files_list_miniImageNet,len(files_list_miniImageNet))
 _,vallist = get_training_and_valid_sets(shuffled)
 
 # Recall we have the training and valid splits, now we do the valid and test split.
+random.seed(10) 
 
 def get_valid_and_test_sets(file_list):
     split = 0.50           
