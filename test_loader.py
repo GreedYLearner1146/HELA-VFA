@@ -1,4 +1,4 @@
-random.seed(500) 
+random.seed(500) # To ensure that same type of classes are split into training and valid respectively as per training.
 
 # Same type of train-val class split as in Data_Preparation.py.
 shuffled = random.sample(files_list_miniImageNet,len(files_list_miniImageNet))
