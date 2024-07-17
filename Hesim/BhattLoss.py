@@ -13,7 +13,7 @@ class SqRootSimilarity(BaseDistance):
 
 ####################################################################################
 
-class HellingerSimilarity(SqRootSimilarity):
+class BhattSimilarity(SqRootSimilarity):
     def __init__(self, **kwargs):
         super().__init__(normalize_embeddings=True, **kwargs)
         assert self.is_inverted
@@ -21,7 +21,7 @@ class HellingerSimilarity(SqRootSimilarity):
 
 ####################################################################################
 
-class HesimLoss(GenericPairLoss):
+class BhattLoss(GenericPairLoss):
     def __init__(self, temperature=0.01, **kwargs):
         super().__init__(mat_based_loss=False, **kwargs)
         self.temperature = temperature
@@ -45,10 +45,11 @@ class HesimLoss(GenericPairLoss):
 
             max_val = torch.max(
                 pos_pairs, torch.max(neg_pairs, dim=1, keepdim=True)[0]
-            ).detach()    # Hellinger similarity.
-            numerator = torch.exp(torch.sqrt(torch.abs(pos_pairs)) - torch.sqrt(torch.abs(max_val))).squeeze(1)   
-            denominator = torch.sum(torch.exp(torch.sqrt(torch.abs(neg_pairs)) - torch.sqrt(torch.abs(max_val))), dim=1) + numerator  
+            ).detach()          # Bhattarchayya similarity: 1 - (Hellinger Similarity)**2.
+            numerator = torch.exp(1 - 0.5*(torch.sqrt(torch.abs(pos_pairs))-torch.sqrt(torch.abs(max_val)))**2).squeeze(1)
+            denominator = torch.sum(torch.exp(1 - 0.5*(torch.sqrt(torch.abs(neg_pairs))-torch.sqrt(torch.abs(max_val)))**2), dim=1) + numerator
             log_exp = torch.log((numerator / denominator) + small_val(dtype))
+            ################################################################################################################
             return {
                 "loss": {
                     "losses": -log_exp,
@@ -59,7 +60,7 @@ class HesimLoss(GenericPairLoss):
         return self.zero_losses()
 
     def get_default_distance(self):
-        return HellingerSimilarity()
+        return BhattSimilarity()
 
-#########################################################################
-Hesimloss= HesimLoss(temperature=0.01)  # Pre-requisite to running the HesimLoss criterion in the training code model_train.py.
+#################################################################################################
+Bhattloss= BhattLoss(temperature=0.01)  # Note: cannot go below 0.01!
