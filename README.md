@@ -53,6 +53,14 @@ Please cite the following paper if you find it useful for your work:
 
 Lee,  G. Y., Dam,  T., Poenar,  D. P., Duong,  V. N. & Ferdaus,  M. M. (2024). HELA-VFA: a hellinger distance-attention-based feature aggregation network for few-shot classification. 2024 IEEE/CVF Winter Conference on Applications of Computer Vision (WACV), 2162-2172. https://dx.doi.org/10.1109/WACV57701.2024.00217
 
+@inproceedings{lee2024hela, \
+  title={HELA-VFA: A Hellinger Distance-Attention-based Feature Aggregation Network for Few-Shot Classification},\
+  author={Lee, Gao Yu and Dam, Tanmoy and Poenar, Daniel Puiu and Duong, Vu N and Ferdaus, Md Meftahul},\
+  booktitle={Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision},\
+  pages={2173--2183},\
+  year={2024}
+}
+
 
 ## Some References ##
 
